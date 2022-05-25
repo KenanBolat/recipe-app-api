@@ -19,7 +19,7 @@ services:
       - DB_NAME=devdb
       - DB_USER=devuser
       - DB_PASS=kalman
-    depends_on:
+    depends_on: 
       - db
 
   db:
