@@ -4,7 +4,12 @@ __pycache__/
 *$py.class
 
 # database folder 
-db/ 
+db/
+
+# pycharm
+.idea
+.idea/
+
 
 # C extensions
 *.so
