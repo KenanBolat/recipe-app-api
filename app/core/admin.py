@@ -48,4 +48,4 @@ class UserAdmin(BaseUserAdmin):
 admin.site.register(models.User, UserAdmin)
 # for the customization UserAdmin must be included
 admin.site.register(models.Recipe)
-admin.site.register(models.Tag )
+admin.site.register(models.Tag)

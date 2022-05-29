@@ -11,7 +11,9 @@ from core import models
 
 def create_user(email='test@example.com', password='testpass'):
     """create and return new user."""
-    return get_user_model().objects.create_user(email=email, password=password, )
+    return get_user_model().objects.create_user(
+        email=email,
+        password=password)
 
 
 class ModelTest(TestCase):
@@ -77,6 +79,4 @@ class ModelTest(TestCase):
         """Test creating tag is successful,"""
         user = create_user()
         tag = models.Tag.objects.create(user=user, name='Tag1')
-
         self.assertEqual(str(tag), tag.name)
-
