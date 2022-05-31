@@ -86,7 +86,7 @@ DATABASES = {
         'PASSWORD': os.environ.get('DB_PASS'),
     }
 }
-
+#
 #
 # DATABASES = {
 #     'default': {
