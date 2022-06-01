@@ -4,7 +4,7 @@ LABEL maintainer='Kenan BOLAT'
 ENV PYTHONUNBUFFERED 1
 COPY ./requirements.txt /tmp/requirements.txt
 COPY ./requirements.dev.txt /tmp/requirements.dev.txt
-COPY ./scripts /scripts
+COPY ./scripts/run.sh /scripts/run.sh
 COPY ./app /app
 WORKDIR /app
 EXPOSE 8000
@@ -28,9 +28,10 @@ RUN python -m venv /py && \
     mkdir -p /vol/web/static && \
     chown -R django-user:django-user /vol/* && \
     chmod -R 755 /vol && \
-    chmod -R +x /scripts
+    chmod -R +x /scripts/* && \
+    chown -R django-user:django-user /scripts/*
 
-ENV PATH="/srcipts:/py/bin:$PATH"
+ENV PATH="/scripts:/py/bin:$PATH"
 
 USER django-user
 
