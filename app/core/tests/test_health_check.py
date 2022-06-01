@@ -18,6 +18,3 @@ class HealthCheckTests(TestCase):
         res = client.get(url)
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-
-
-
