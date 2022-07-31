@@ -11,27 +11,14 @@ from drf_spectacular.utils import (
 from rest_framework import (viewsets, mixins, status)
 # mixins is required to add additional functionalities to views
 
-from rest_framework.decorators import action
-from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
-from core.models import (Portfolio, Tag)
+from core.models import (Portfolio)
 
 from . import serializers
 
 
-@extend_schema_view(
-    list=extend_schema(
-        parameters=[
-            OpenApiParameter(
-                'tags',
-                OpenApiTypes.STR,
-                description='Comma seperated list of tag IDs to filter',
-            )
-        ]
-    )
-)
 class PortfolioViewSet(viewsets.ModelViewSet):
     """View from the manage portfolio APIs."""
     serializer_class = serializers.PortfolioDetailSerializer
@@ -47,11 +34,7 @@ class PortfolioViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         """Retrieve portfolios for authenticated user."""
         # return self.queryset.filter(user=self.request.user).order_by('-id')
-        tags = self.request.query_params.get('tags')
         queryset = self.queryset
-        if tags:
-            tag_ids = self._params_to_ints(tags)
-            queryset = queryset.filter(tags__id__in=tag_ids)
 
         return queryset.filter(
             user=self.request.user
@@ -99,9 +82,3 @@ class BasePortfolioAttrViewSet(mixins.DestroyModelMixin,
         return queryset.filter(
             user=self.request.user
         ).order_by('-name').distinct()
-
-
-class TagViewSet(BasePortfolioAttrViewSet):
-    """Manage Tags in the database."""
-    serializer_class = serializers.TagSerializer
-    queryset = Tag.objects.all()

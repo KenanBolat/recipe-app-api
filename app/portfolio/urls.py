@@ -12,7 +12,6 @@ from portfolio import views
 
 router = DefaultRouter()
 router.register('portfolios', views.PortfolioViewSet)
-router.register('tags', views.TagViewSet)
 
 app_name = 'portfolio'
 
