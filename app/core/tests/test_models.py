@@ -60,21 +60,21 @@ class ModelTest(TestCase):
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
 
-    def test_create_recipe(self):
-        """Test creating a recipe is successful."""
+    def test_create_portfolio(self):
+        """Test creating a portfolio is successful."""
         user = get_user_model().objects.create_user(
             'test@example.com',
             'testpass123',
         )
-        recipe = models.Recipe.objects.create(
+        portfolio = models.Portfolio.objects.create(
             user=user,
-            title='Sample recipe name',
+            title='Sample portfolio name',
             time_minutes=5,
             price=Decimal('5.50'),
-            description='Sample recipe description',
+            description='Sample portfolio description',
         )
 
-        self.assertEqual(str(recipe), recipe.title)
+        self.assertEqual(str(portfolio), portfolio.title)
 
     def test_create_tag(self):
         """Test creating tag is successful."""
@@ -91,11 +91,3 @@ class ModelTest(TestCase):
         )
         self.assertEqual(str(ingredient), ingredient.name)
 
-    @patch('core.models.uuid.uuid4')
-    def test_recipe_file_name_uuid(self, mock_uuid):
-        """Test generating image path."""
-        uuid = 'test-uuid'
-        mock_uuid.return_value = uuid
-        file_path = models.recipe_image_file_path(None, 'example.jpg')
-
-        self.assertEqual(file_path, f'uploads/recipe/{uuid}.jpg')
