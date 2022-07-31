@@ -41,25 +41,11 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser, PermissionsMixin):
     """User in the system."""
-    email = models.EmailField(max_length=255, unique=True)
-    name = models.CharField(max_length=255)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=True)
-
-    objects = UserManager()
-
-    USERNAME_FIELD = 'email'
-
+    pass
 
 class Portfolio(models.Model):
     """Portfolio object."""
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-    )
-    title = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
-    link = models.CharField(max_length=255, blank=True)
+    pass
 
     def __str__(self):
         return self.title
